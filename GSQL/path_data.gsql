@@ -1,0 +1,38 @@
+CREATE QUERY path_data(VERTEX<Users> inputUser, VERTEX<Users> inputUser2) FOR GRAPH SpotifyGraph { 
+
+  start = {inputUser};
+  endnode = {inputUser2};
+  SumAccum<INT> @@sum_accum;
+  INT t_path_length = 2;
+
+  q1 = SELECT s FROM start:s-(user_has_top_track:e)-Track:y - (user_has_top_track:e) - endnode:en
+          ACCUM
+            @@sum_accum += 1;
+  PRINT @@sum_accum as t_num_path, t_path_length;
+  
+  
+  
+  
+  SumAccum<INT> @@sum_accum2;
+  INT a_path_length = 2;
+
+  q2 = SELECT s FROM start:s-(user_has_artist:e)-Artist:y - (user_has_artist:e) - endnode:en
+          ACCUM
+            @@sum_accum2 += 1;
+
+  PRINT @@sum_accum2 as a_num_path, a_path_length;
+  
+  
+  
+  
+  SumAccum<INT> @@sum_accum3;
+  INT g_path_length = 4;
+
+  q3 = SELECT s FROM start:s-(user_has_artist:e)-Artist:y - (artist_has_genre:a) - Genre:g - (artist_has_genre:a)- Artist:y - (user_has_artist:e) - endnode:en
+          ACCUM
+            @@sum_accum3 += 1;
+
+  PRINT @@sum_accum3 as g_num_path,g_path_length;
+  
+  
+}

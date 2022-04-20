@@ -1,0 +1,51 @@
+CREATE QUERY AvgAudioFeatures(vertex<Users> inputUser1, vertex<Users> inputUser2,
+                              vertex<Users> inputUser3,vertex<Users> inputUser4) FOR GRAPH SpotifyGraph { 
+ 
+  AvgAccum @@danceability;
+  AvgAccum @@key;
+  AvgAccum @@valence;
+  AvgAccum @@energy;
+  AvgAccum @@tempo;
+  
+  
+  start1 = {inputUser1};
+  q1 = SELECT tr from start1:s-(user_has_top_track:u)-Track:tr
+    POST_ACCUM @@danceability += tr.danceability
+    POST_ACCUM @@key += tr.track_key
+    POST_ACCUM @@valence += tr.valence
+    POST_ACCUM @@energy += tr.energy
+    POST_ACCUM @@tempo += tr.tempo;
+  
+  PRINT inputUser1 as User, @@danceability as danceability, @@key as key, @@valence as valence, @@energy as energy, @@tempo as tempo;
+  
+ start2 = {inputUser2};
+  q2 = SELECT tr from start2:s-(user_has_top_track:u)-Track:tr
+    POST_ACCUM @@danceability += tr.danceability
+    POST_ACCUM @@key += tr.track_key
+    POST_ACCUM @@valence += tr.valence
+    POST_ACCUM @@energy += tr.energy
+    POST_ACCUM @@tempo += tr.tempo;
+  
+  PRINT inputUser2 as User, @@danceability as danceability, @@key as key, @@valence as valence, @@energy as energy, @@tempo as tempo;
+  
+  start3 = {inputUser3};
+  q3 = SELECT tr from start3:s-(user_has_top_track:u)-Track:tr
+    POST_ACCUM @@danceability += tr.danceability
+    POST_ACCUM @@key += tr.track_key
+    POST_ACCUM @@valence += tr.valence
+    POST_ACCUM @@energy += tr.energy
+    POST_ACCUM @@tempo += tr.tempo;
+  
+  PRINT inputUser3 as User, @@danceability as danceability, @@key as key, @@valence as valence, @@energy as energy, @@tempo as tempo;
+  
+  start4 = {inputUser4};
+  q4 = SELECT tr from start4:s-(user_has_top_track:u)-Track:tr
+    POST_ACCUM @@danceability += tr.danceability
+    POST_ACCUM @@key += tr.track_key
+    POST_ACCUM @@valence += tr.valence
+    POST_ACCUM @@energy += tr.energy
+    POST_ACCUM @@tempo += tr.tempo;
+  
+  PRINT inputUser4 as User, @@danceability as danceability, @@key as key, @@valence as valence, @@energy as energy, @@tempo as tempo;
+
+}
