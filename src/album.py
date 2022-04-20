@@ -9,8 +9,8 @@ file_tracks = os.path.join(dirname, tracks_path)
 
 
 # Function for access token
-def access_token(client_id='59b3cc623f1541778fed291fb463af17',
-                 client_secret='738913102ba14f7a8d1dbe748d002924'):
+def access_token(client_id='ENTER CLIENT ID',
+                 client_secret='ENTER CLIENT SECRET'):
     AUTH_URL = 'https://accounts.spotify.com/api/token'
     auth_response = requests.post(AUTH_URL, {
                                  'grant_type': 'client_credentials',

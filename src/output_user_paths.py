@@ -10,7 +10,7 @@ users_file = os.path.join(dirname, users_path)
 
 host = "https://rassan1.i.tgcloud.io"
 username = "tigergraph"
-password = "tigergraph"
+password = "ENTER PASSWORD"
 graphname = "SpotifyGraph"
 user_list = [1, 2, 3, 4]
 pair_l = itertools.combinations(user_list, 2)
